@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+			<field
+				name="colorivoox"
+				type="color"
+                default="ff6600"
+				label="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_LABEL"
+				description="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_DESCRIPTION"
+			/>
+		</fieldset>
+	</fields>
+</form>
