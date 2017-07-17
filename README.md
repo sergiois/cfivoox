@@ -18,9 +18,19 @@ To integrate the podcast in the article you need to enter the id of the podcast:
 
 # Changelogs
 
+### Version 1.0.2 [2017-07-17]
+* **[Added]** HTML5 and HTML5 mini options with customization: You can select the type of the player
+* **[Changed]** Language files
+
 ### Version 1.0.1 [2017-06-29]
 * **[Added]** Iframe option with customization: You can select the color of the player
 * **[Changed]** Language files
 
 ### Version 1.0.0 [2017-06-27]
 * **[Added]** Iframe option without customization
+
+* * *
+
+## Copyright & License
+This custom field is licensed under GNU LESSER GENERAL PUBLIC LICENSE.
+Copyright (C) 2017 [Sergio Iglesias](https://sergioiglesias.net) - All rights reserved.

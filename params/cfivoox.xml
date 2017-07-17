@@ -9,6 +9,17 @@
 				label="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_LABEL"
 				description="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_DESCRIPTION"
 			/>
+			<field
+				name="player"
+				type="list"
+				default="default"
+				label="PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_LABEL"
+				description="PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_DESCRIPTION"
+			>
+				<option value="default">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_DEFAULT</option>
+				<option value="html5">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_HTML5</option>
+				<option value="html5mini">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_HTML5MINI</option>
+			</field>
 		</fieldset>
 	</fields>
 </form>
