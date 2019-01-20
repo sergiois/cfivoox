@@ -18,6 +18,10 @@ To integrate the podcast in the article you need to enter the id of the podcast:
 
 # Changelogs
 
+### Version 1.0.3 [2019-01-20]
+* **[Added]** Changes to upload plugin to the JED
+* **[Changed]** Language files
+
 ### Version 1.0.2 [2017-07-17]
 * **[Added]** HTML5 and HTML5 mini options with customization: You can select the type of the player
 * **[Changed]** Language files
