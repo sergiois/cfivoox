@@ -5,20 +5,22 @@
 			<field
 				name="colorivoox"
 				type="color"
-                default="ff6600"
+				default=""
 				label="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_LABEL"
 				description="PLG_FIELDS_CFIVOOX_PARAMS_COLOR_DESCRIPTION"
 			/>
 			<field
 				name="player"
 				type="list"
-				default="default"
+				default="global"
 				label="PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_LABEL"
 				description="PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_DESCRIPTION"
 			>
+				<option value="global">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_GLOBAL</option>
 				<option value="default">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_DEFAULT</option>
 				<option value="html5">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_HTML5</option>
 				<option value="html5mini">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_HTML5MINI</option>
+				<option value="simplelink">PLG_FIELDS_CFIVOOX_PARAMS_PLAYER_OPTION_SIMPLELINK</option>
 			</field>
 		</fieldset>
 	</fields>
