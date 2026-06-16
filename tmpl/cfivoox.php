@@ -8,33 +8,69 @@
  * @author 		Sergio Iglesias (@sergiois)
  */
 
- defined('_JEXEC') or die;
+defined('_JEXEC') or die;
 
 if (!$field->value || $field->value == '-1')
 {
 	return;
 }
 
-$value = $field->value;
+$rawValue = trim((string) $field->value);
+$value = null;
 
-switch($field->fieldparams->get('player', 'default')){
+if (preg_match('~(?:go\.ivoox\.com/rf/|_rf_|player_ej_|player_ek_)([0-9]+)~i', $rawValue, $match))
+{
+	$value = $match[1];
+}
+elseif (preg_match('~^[0-9]+$~', $rawValue))
+{
+	$value = $rawValue;
+}
+
+if (!$value)
+{
+	return;
+}
+
+$plugin = Joomla\CMS\Plugin\PluginHelper::getPlugin('fields', 'cfivoox');
+$pluginParams = new Joomla\Registry\Registry($plugin ? $plugin->params : '{}');
+$defaultColor = (string) $pluginParams->get('default_colorivoox', '#ff6600');
+$defaultPlayer = (string) $pluginParams->get('default_player', 'default');
+
+$value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+$fieldColor = trim((string) $field->fieldparams->get('colorivoox', ''));
+$color = preg_replace('/[^a-fA-F0-9]/', '', $fieldColor !== '' ? $fieldColor : $defaultColor);
+$color = preg_match('/^([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/', $color) ? $color : 'ff6600';
+$fieldPlayer = (string) $field->fieldparams->get('player', 'global');
+$player = $fieldPlayer === 'global' || $fieldPlayer === '' ? $defaultPlayer : $fieldPlayer;
+
+switch ($player)
+{
 	case 'html5':
-	?>
-	<iframe style="width:100%; height:200px;" class="cfivoox" frameborder="0" allowfullscreen="" scrolling="no" src="https://www.ivoox.com/player_ej_<?php echo $value; ?>_2_1.html"></iframe>
-	<?php
-	break;
+		$src = 'https://www.ivoox.com/player_ej_' . $value . '_2_1.html?c1=' . $color;
+		$style = 'width:100%; height:200px; border:0; box-sizing:border-box;';
+		break;
 
 	case 'html5mini':
-	?>
-	<iframe style="width:100%; height:48px;" class="cfivoox" frameborder="0" allowfullscreen="" scrolling="no" src="https://www.ivoox.com/player_ek_<?php echo $value; ?>_2_1.html"></iframe>
-	<?php
-	break;
+		$src = 'https://www.ivoox.com/player_ek_' . $value . '_2_1.html?c1=' . $color;
+		$style = 'width:100%; height:48px; border:0; box-sizing:border-box;';
+		break;
+
+	case 'simplelink':
+		?>
+		<p class="cfivoox cfivoox-link">
+			<a href="https://go.ivoox.com/rf/<?php echo $value; ?>" target="_blank" rel="noopener noreferrer">
+				<?php echo htmlspecialchars(Joomla\CMS\Language\Text::_('PLG_FIELDS_CFIVOOX_AUDIO_LINK_LABEL'), ENT_QUOTES, 'UTF-8'); ?>
+			</a>
+		</p>
+		<?php
+		return;
 
 	case 'default':
 	default:
-	?>
-	<iframe id="audio_<?php echo $value; ?>" frameborder="0" allowfullscreen="" scrolling="no" style="width:100%; height:200px; border:1px solid #EEE; box-sizing:border-box;" class="cfivoox" src="https://www.ivoox.com/player_ej_<?php echo $value; ?>_4_1.html?c1=<?php echo str_replace('#','',$field->fieldparams->get('colorivoox', '#ff6600')); ?>"></iframe>
-	<?php
-	break;
+		$src = 'https://www.ivoox.com/player_ej_' . $value . '_6_1.html?c1=' . $color;
+		$style = 'width:100%; height:200px; border:1px solid #EEE; box-sizing:border-box;';
+		break;
 }
 ?>
+<iframe title="iVoox audio player" id="audio_<?php echo $value; ?>" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy" style="<?php echo $style; ?>" class="cfivoox" src="<?php echo $src; ?>"></iframe>
